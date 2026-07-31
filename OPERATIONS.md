@@ -313,12 +313,12 @@ made, or chose to keep, is theirs; leftover state you did not create may be
 load-bearing for something you cannot see. When in doubt, name what is still on
 disk and let them decide.
 
-This was written after a session installed `mischief@0.1.1` from npm into
-`~/.blackhole/Mischief/2026-07-31/smoke/` to check that the published tarball
-actually ran, confirmed it did, reported the result — and left the install, the
-config it had scaffolded, and two generated reports sitting on disk. The task had
-already been reported as complete. Nothing removed them until the next request
-happened to be this rule.
+This was written after a session installed a freshly published package from npm
+into a dated scratch directory, purely to check that the tarball actually ran —
+confirmed it did, reported the result, and left the install, the config it had
+scaffolded, and two generated reports sitting on disk. The task had already been
+reported as complete. Nothing removed them until the next request happened to be
+this rule.
 
 ## Name and place every document you write
 
