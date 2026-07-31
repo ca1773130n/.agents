@@ -276,21 +276,32 @@ and safe to delete without reading it.
 This applies to files you intend to delete in a moment. Those are the ones that
 survive.
 
-### Delete an artifact once it has served its purpose
+## Delete an artifact once it has served its purpose
 
 **Anything created to accomplish something gets removed as soon as that thing is
 accomplished**, in the same motion that finishes the work. Not in a cleanup pass
 afterwards, because there is no afterwards.
 
-Each rule above covers one instance of this: the merged worktree, the process the
-session launched, the throwaway file, the thing a change made dead. The shape
-never changes. Something gets made to answer one question, the question gets
-answered, and then nothing deletes it, because by then the work reads as done and
-attention has moved on. It holds equally for what those rules do not name — a
+Several rules above are one instance of this each: the merged worktree, the
+process the session launched, the throwaway file, the thing a change made dead.
+The shape never changes. Something gets made to answer one question, the question
+gets answered, and then nothing deletes it, because by then the work reads as done
+and attention has moved on. It holds equally for what those rules do not name — a
 package installed once to smoke-test it, a container built to reproduce one bug,
 build and coverage output produced to be read through once.
 
-So end a task by sweeping what it created, not only by reporting what it did.
+**Before saying a task is done, list what it created and account for every
+entry**, exactly as you already do for `git worktree list` and
+`git branch --no-merged main`:
+
+```bash
+git status --short                        # anything the task dropped in the repo
+ls ~/.blackhole/<project>/$(date +%F)/    # today's scratch — still needed?
+git worktree list                         # trees whose question is answered
+```
+
+Then say what is left and why. "Nothing left" is a fine answer, and usually the
+right one, but it has to be checked rather than assumed.
 
 Keep anything that is *evidence*: a report that was asked for, a document
 recording a decision, output the user has not seen yet. The test is whether
@@ -299,8 +310,15 @@ someone will read it again, not whether it was slow to produce.
 Two limits, and they outrank the rule above. Delete only inside directories this
 session created, and delete nothing you are unsure about. An artifact the user
 made, or chose to keep, is theirs; leftover state you did not create may be
-load-bearing for something you cannot see. When in doubt, finish by naming what
-is still on disk and why, and let them decide.
+load-bearing for something you cannot see. When in doubt, name what is still on
+disk and let them decide.
+
+This was written after a session installed `mischief@0.1.1` from npm into
+`~/.blackhole/Mischief/2026-07-31/smoke/` to check that the published tarball
+actually ran, confirmed it did, reported the result — and left the install, the
+config it had scaffolded, and two generated reports sitting on disk. The task had
+already been reported as complete. Nothing removed them until the next request
+happened to be this rule.
 
 ## Name and place every document you write
 
